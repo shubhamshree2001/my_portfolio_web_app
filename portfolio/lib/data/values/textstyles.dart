@@ -59,6 +59,12 @@ class AppTextStyles {
     fontWeight: FontWeight.w600,
   );
 
+  static const heading3Black = TextStyle(
+    color: Colors.black,
+    fontSize: 20,
+    fontWeight: FontWeight.w600,
+  );
+
   static const italic24Bold = TextStyle(
     color: Colors.white,
     fontSize: 24,

@@ -37,7 +37,7 @@ class Strings {
   static const studyTableDescription =
       "Key Focus: Flutter, Dart, Firebase, GCP";
   static const sparksFoundationCompanyname = "The Sparks Foundation";
-  static const sparksFoundationDuration = "(Mar 2022 – May 2022)";
+  static const sparksFoundationDuration = "(Dec 2021 – Mar 2022)";
   static const sparksFoundationRole = "Mobile Application Development  Intern";
   static const sparksFoundationLocation = "Bangalore, India";
   static const sparksFoundationDescription =

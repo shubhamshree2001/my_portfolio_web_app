@@ -31,6 +31,7 @@ class _HomeScreenState extends State<HomeScreen>
   final ScrollController expertiseScrollController = ScrollController();
   Timer? expertiseAutoScrollTimer;
   bool isPageScrollingUp = false;
+  bool isHovered = false;
   GlobalKey one = GlobalKey();
   GlobalKey two = GlobalKey();
   GlobalKey three = GlobalKey();
@@ -215,9 +216,12 @@ class _HomeScreenState extends State<HomeScreen>
                         itemCount: homeCubit.expertiseItems.length,
                         itemBuilder: (context, index) {
                           return buildItem(
-                              homeCubit.expertiseItems[index]["title"]!,
-                              homeCubit.expertiseItems[index]["iconPath"]!,
-                              mobileView);
+                            homeCubit.expertiseItems[index]["title"]!,
+                            homeCubit.expertiseItems[index]["iconPath"]!,
+                            mobileView,
+                            homeCubit,
+                            homeCubit.expertiseItems[index]["expertiseUrls"]!,
+                          );
                         },
                       ),
                     ),
@@ -533,10 +537,9 @@ class _HomeScreenState extends State<HomeScreen>
                       ],
                     ),
                     Gap(mobileView ? 30.h : 30),
-                    ListView.builder(
-                      shrinkWrap: true,
-                      itemCount: homeCubit.experienceItems.length,
-                      itemBuilder: (context, index) {
+                    Column(
+                      children: List.generate(homeCubit.experienceItems.length,
+                          (index) {
                         return Padding(
                           padding:
                               EdgeInsets.only(bottom: mobileView ? 8.h : 8),
@@ -552,10 +555,36 @@ class _HomeScreenState extends State<HomeScreen>
                                 ["location"]!,
                             description: homeCubit.experienceItems[index]
                                 ["description"]!,
+                            urls: homeCubit.experienceItems[index]
+                                ["organizationUrls"]!,
                           ),
                         );
-                      },
+                      }),
                     ),
+
+                    // ListView.builder(
+                    //   shrinkWrap: true,
+                    //   itemCount: homeCubit.experienceItems.length,
+                    //   itemBuilder: (context, index) {
+                    //     return Padding(
+                    //       padding:
+                    //           EdgeInsets.only(bottom: mobileView ? 8.h : 8),
+                    //       child: ExperienceStep(
+                    //         companyLogo: homeCubit.experienceItems[index]
+                    //             ["companyLogo"]!,
+                    //         companyName: homeCubit.experienceItems[index]
+                    //             ["companyName"]!,
+                    //         duration: homeCubit.experienceItems[index]
+                    //             ["duration"]!,
+                    //         role: homeCubit.experienceItems[index]["role"]!,
+                    //         location: homeCubit.experienceItems[index]
+                    //             ["location"]!,
+                    //         description: homeCubit.experienceItems[index]
+                    //             ["description"]!,
+                    //       ),
+                    //     );
+                    //   },
+                    // ),
                   ],
                 ),
               ),
@@ -582,10 +611,9 @@ class _HomeScreenState extends State<HomeScreen>
                       ],
                     ),
                     Gap(mobileView ? 30.h : 30),
-                    ListView.builder(
-                      shrinkWrap: true,
-                      itemCount: homeCubit.educationItems.length,
-                      itemBuilder: (context, index) {
+                    Column(
+                      children: List.generate(homeCubit.experienceItems.length,
+                          (index) {
                         return Padding(
                           padding:
                               EdgeInsets.only(bottom: mobileView ? 8.h : 8),
@@ -599,10 +627,33 @@ class _HomeScreenState extends State<HomeScreen>
                             role: homeCubit.educationItems[index]["role"]!,
                             location: homeCubit.educationItems[index]
                                 ["location"]!,
+                            urls: homeCubit.educationItems[index]
+                                ["organizationUrls"]!,
                           ),
                         );
-                      },
+                      }),
                     ),
+                    // ListView.builder(
+                    //   shrinkWrap: true,
+                    //   itemCount: homeCubit.educationItems.length,
+                    //   itemBuilder: (context, index) {
+                    //     return Padding(
+                    //       padding:
+                    //           EdgeInsets.only(bottom: mobileView ? 8.h : 8),
+                    //       child: ExperienceStep(
+                    //         companyLogo: homeCubit.educationItems[index]
+                    //             ["companyLogo"]!,
+                    //         companyName: homeCubit.educationItems[index]
+                    //             ["companyName"]!,
+                    //         duration: homeCubit.educationItems[index]
+                    //             ["duration"]!,
+                    //         role: homeCubit.educationItems[index]["role"]!,
+                    //         location: homeCubit.educationItems[index]
+                    //             ["location"]!,
+                    //       ),
+                    //     );
+                    //   },
+                    // ),
                   ],
                 ),
               ),
@@ -641,7 +692,7 @@ class _HomeScreenState extends State<HomeScreen>
                       itemCount: homeCubit.experienceItems.length,
                       itemBuilder: (context, index) {
                         return Padding(
-                          padding: EdgeInsets.only(bottom: 8.0),
+                          padding: EdgeInsets.only(bottom:mobileView ? 8.h : 8),
                           child: ExperienceStep(
                             companyLogo: homeCubit.experienceItems[index]
                                 ["companyLogo"]!,
@@ -654,6 +705,8 @@ class _HomeScreenState extends State<HomeScreen>
                                 ["location"]!,
                             description: homeCubit.experienceItems[index]
                                 ["description"]!,
+                            urls: homeCubit.experienceItems[index]
+                                ["organizationUrls"]!,
                           ),
                         );
                       },
@@ -689,7 +742,7 @@ class _HomeScreenState extends State<HomeScreen>
                       itemCount: homeCubit.educationItems.length,
                       itemBuilder: (context, index) {
                         return Padding(
-                          padding: EdgeInsets.only(bottom: 8.0),
+                          padding: EdgeInsets.only(bottom: mobileView ? 8.h : 8),
                           child: ExperienceStep(
                             companyLogo: homeCubit.educationItems[index]
                                 ["companyLogo"]!,
@@ -700,6 +753,8 @@ class _HomeScreenState extends State<HomeScreen>
                             role: homeCubit.educationItems[index]["role"]!,
                             location: homeCubit.educationItems[index]
                                 ["location"]!,
+                            urls: homeCubit.educationItems[index]
+                                ["organizationUrls"]!,
                           ),
                         );
                       },
@@ -760,13 +815,59 @@ class _HomeScreenState extends State<HomeScreen>
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisSize: MainAxisSize.min,
               children: [
-                SizedBox(
-                  height: mobileView ? screenWidth * 0.4 : screenWidth * 0.3,
-                  width: mobileView ? screenWidth * 0.4 : screenWidth * 0.3,
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(mobileView ? 10.r : 10),
-                    child: Image.asset(
-                      AppImages.selfPicIcon,
+                InkWell(
+                  onTap: () {
+                    showDialog(
+                      context: context,
+                      builder: (BuildContext context) {
+                        return AlertDialog(
+                          title: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Row(
+                                children: [
+                                  Icon(
+                                    Icons.person,
+                                    size: mobileView ? 25.w : 25,
+                                    color: Colors.black,
+                                  ),
+                                  Gap(mobileView ? 8.w : 8),
+                                  Text(
+                                    Strings.aboutMeText,
+                                    style: AppTextStyles.heading3Black,
+                                  ),
+                                ],
+                              ),
+                              InkWell(
+                                  onTap: () {
+                                    Navigator.pop(context);
+                                  },
+                                  child: Icon(
+                                    Icons.close,
+                                    weight: 1000,
+                                  )),
+                            ],
+                          ),
+                          content: Container(
+                            child: ClipRRect(
+                                borderRadius: BorderRadius.circular(
+                                    mobileView ? 10.r : 10),
+                                child: Image.asset(AppImages.selfPicIcon)),
+                          ),
+                        );
+                      },
+                    );
+                  },
+                  child: SizedBox(
+                    height: mobileView ? screenWidth * 0.4 : screenWidth * 0.3,
+                    width: mobileView ? screenWidth * 0.4 : screenWidth * 0.3,
+                    child: ClipRRect(
+                      borderRadius:
+                          BorderRadius.circular(mobileView ? 10.r : 10),
+                      child: Image.asset(
+                        AppImages.selfPicIcon,
+                      ),
                     ),
                   ),
                 ),
@@ -871,7 +972,9 @@ class _HomeScreenState extends State<HomeScreen>
     );
   }
 
-  Widget buildItem(String title, String iconPath, bool mobileView) {
+  Widget buildItem(
+      String title, String iconPath, bool mobileView, HomeCubit homeCubit, String expertiseUrls) {
+    //  await homeCubit.openWebUrls(expertiseUrls);
     return Container(
       width: 180,
       margin: EdgeInsets.symmetric(horizontal: mobileView ? 10.w : 10),

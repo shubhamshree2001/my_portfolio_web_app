@@ -18,8 +18,6 @@ class HomeCubit extends Cubit<HomeState> {
 
   final HomeRepo homeRepo = HomeRepo();
 
-
-
   void setIsScrollingUp(bool? isPageScrollingUp) {
     emit(state.copyWith(
       isPageScrollingUp: isPageScrollingUp,
@@ -38,26 +36,32 @@ class HomeCubit extends Cubit<HomeState> {
     {
       "title": Strings.flutter,
       "iconPath": AppImages.flutterIcon,
+      "expertiseUrls": URLs.flutterUrls,
     },
     {
       "title": Strings.dart,
       "iconPath": AppImages.dartIcon,
+      "expertiseUrls": URLs.dartUrls,
     },
     {
       "title": Strings.firebase,
       "iconPath": AppImages.firebaseIcon,
+      "expertiseUrls": URLs.firebaseUrls,
     },
     {
       "title": Strings.gcp,
       "iconPath": AppImages.gcpIcon,
+      "expertiseUrls": URLs.gcpUrls,
     },
     {
       "title": Strings.cPluss,
       "iconPath": AppImages.cPlusIcon,
+      "expertiseUrls": URLs.cPlusPlus,
     },
     {
       "title": Strings.versionControl,
       "iconPath": AppImages.versionControlIcon,
+      "expertiseUrls": URLs.versionControlUrls,
     },
   ];
 
@@ -90,6 +94,7 @@ class HomeCubit extends Cubit<HomeState> {
       "role": Strings.ambeeRole,
       "location": Strings.ambeeLocation,
       "description": Strings.ambeeDescription,
+      "organizationUrls": URLs.ambeeUrls,
     },
     // {
     //   "companyLogo": AppImages.aistheticIcon,
@@ -98,6 +103,7 @@ class HomeCubit extends Cubit<HomeState> {
     //   "role": Strings.aistheticRole,
     //   "location": Strings.aistheticLocation,
     //   "description": Strings.aistheticDescription,
+    //"organizationUrls": URLs.aistheticUrls,
     // },
     {
       "companyLogo": AppImages.mindpeersIcon,
@@ -106,6 +112,7 @@ class HomeCubit extends Cubit<HomeState> {
       "role": Strings.mindpeersRole,
       "location": Strings.mindpeersLocation,
       "description": Strings.mindpeersDescription,
+      "organizationUrls": URLs.mindpeersUrls,
     },
     {
       "companyLogo": AppImages.studyTableIcon,
@@ -114,6 +121,7 @@ class HomeCubit extends Cubit<HomeState> {
       "role": Strings.studyTableRole,
       "location": Strings.studyTableLocation,
       "description": Strings.studyTableDescription,
+      "organizationUrls": URLs.studyTableUrls,
     },
     {
       "companyLogo": AppImages.sparksFoundationIcon,
@@ -122,6 +130,7 @@ class HomeCubit extends Cubit<HomeState> {
       "role": Strings.sparksFoundationRole,
       "location": Strings.sparksFoundationLocation,
       "description": Strings.sparksFoundationDescription,
+      "organizationUrls": URLs.sparksFoundationUrls,
     },
   ];
 
@@ -132,6 +141,7 @@ class HomeCubit extends Cubit<HomeState> {
       "duration": Strings.mvitDuration,
       "role": Strings.mvitRole,
       "location": Strings.mvitLocation,
+      "organizationUrls": URLs.mvitUrls,
     },
     {
       "companyLogo": AppImages.sriChaitanyaIcon,
@@ -139,6 +149,7 @@ class HomeCubit extends Cubit<HomeState> {
       "duration": Strings.chaitanyaDuration,
       "role": Strings.chaitanyaRole,
       "location": Strings.chaitanyaLocation,
+      "organizationUrls": URLs.chaitanyaUrls,
     },
     {
       "companyLogo": AppImages.openMindsIcon,
@@ -146,6 +157,7 @@ class HomeCubit extends Cubit<HomeState> {
       "duration": Strings.openMindsDuration,
       "role": Strings.openMindsRole,
       "location": Strings.openMindsLocation,
+      "organizationUrls": URLs.openMindsUrls,
     },
     {
       "companyLogo": AppImages.infantJesusIcon,
@@ -153,6 +165,7 @@ class HomeCubit extends Cubit<HomeState> {
       "duration": Strings.infantDuration,
       "role": Strings.infantRole,
       "location": Strings.infantLocation,
+      "organizationUrls": URLs.infantUrls,
     },
   ];
 }

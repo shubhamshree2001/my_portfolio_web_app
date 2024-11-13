@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:my_portfolio_web_app/config/app_config.dart';
 import 'package:my_portfolio_web_app/data/values/textstyles.dart';
+import 'package:my_portfolio_web_app/modules/home/bloc/home_cubit.dart';
 
 class ExperienceStep extends StatefulWidget {
   final String companyLogo;
@@ -10,6 +12,7 @@ class ExperienceStep extends StatefulWidget {
   final String role;
   final String location;
   final String? description;
+  final String? urls;
 
   ExperienceStep({
     required this.companyLogo,
@@ -18,6 +21,7 @@ class ExperienceStep extends StatefulWidget {
     required this.role,
     required this.location,
     this.description,
+    this.urls,
   });
 
   @override
@@ -52,6 +56,7 @@ class _ExperienceStepState extends State<ExperienceStep>
     double screenHeight = MediaQuery.of(context).size.height;
     bool mobileViewForExperience = screenWidth < 768;
     bool mobileView = screenWidth < AppConfig.navBreakpoint;
+    final HomeCubit homeCubit = context.read<HomeCubit>();
     return MouseRegion(
       onEnter: (_) {
         setState(() {
@@ -125,12 +130,17 @@ class _ExperienceStepState extends State<ExperienceStep>
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        ClipRRect(
-                          borderRadius:
-                              BorderRadius.circular(mobileView ? 8.w : 8),
-                          child: Image.asset(
-                            widget.companyLogo,
-                            height: mobileView ? 30.w : 30,
+                        InkWell(
+                          onTap  : () async {
+                            await homeCubit.openWebUrls(widget.urls ?? "");
+                          },
+                          child: ClipRRect(
+                            borderRadius:
+                                BorderRadius.circular(mobileView ? 8.w : 8),
+                            child: Image.asset(
+                              widget.companyLogo,
+                              height: mobileView ? 30.w : 30,
+                            ),
                           ),
                         ),
                         SizedBox(height: mobileView ? 8.h : 8),
