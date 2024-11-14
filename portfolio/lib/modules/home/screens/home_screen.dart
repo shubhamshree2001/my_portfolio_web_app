@@ -58,7 +58,8 @@ class _HomeScreenState extends State<HomeScreen>
   }
 
   void startAutoScroll() {
-    expertiseAutoScrollTimer = Timer.periodic(Duration(milliseconds: 50), (timer) {
+    expertiseAutoScrollTimer =
+        Timer.periodic(Duration(milliseconds: 50), (timer) {
       if (expertiseScrollController.hasClients) {
         double maxScroll = expertiseScrollController.position.maxScrollExtent;
         double currentScroll = expertiseScrollController.offset;
@@ -67,7 +68,8 @@ class _HomeScreenState extends State<HomeScreen>
         }
         expertiseScrollController.animateTo(
           expertiseScrollController.offset + 4.0, // Increased offset
-          duration: Duration(milliseconds: 50), // Reduced duration for faster scroll
+          duration: Duration(milliseconds: 50),
+          // Reduced duration for faster scroll
           curve: Curves.linear,
         );
       }
@@ -207,65 +209,83 @@ class _HomeScreenState extends State<HomeScreen>
                       style: AppTextStyles.heading1800White,
                     ),
                     Gap(mobileView ? screenHeight * 0.05 : screenHeight * 0.1),
-                    // Container(
-                    //   width: mobileView ? 1.sw : 0.78.sw,
-                    //   height: 200,
-                    //   child: ListView.builder(
-                    //     controller: expertiseScrollController,
-                    //     scrollDirection: Axis.horizontal,
-                    //     itemCount: homeCubit.expertiseItems.length,
-                    //     physics: NeverScrollableScrollPhysics(),
-                    //     itemBuilder: (context, index) {
-                    //       return buildItem(
-                    //         homeCubit.expertiseItems[index]["title"]!,
-                    //         homeCubit.expertiseItems[index]["iconPath"]!,
-                    //         mobileView,
-                    //         homeCubit,
-                    //         homeCubit.expertiseItems[index]["expertiseUrls"]!,
-                    //       );
-                    //     },
-                    //   ),
-                    // ),
-                    MouseRegion(
-                      onEnter: (_) =>  setState(() => isHovered = true),
-                      onExit: (_) => setState(() {
-                        isHovered = false;
-                        hoveredIndex = null; // Reset hovered index when leaving the carousel
-                      }),
-                      child: Container(
+                    if (twoItemInGrid) ...[
+                      Container(
                         width: mobileView ? 1.sw : 0.78.sw,
                         height: 200,
-                        child: CarouselSlider.builder(
+                        child: ListView.builder(
+                          controller: expertiseScrollController,
+                          scrollDirection: Axis.horizontal,
                           itemCount: homeCubit.expertiseItems.length,
-                          options: CarouselOptions(
-                            height: 200,
-                            enableInfiniteScroll: true,
-                            viewportFraction: mobileView ? 0.8 : oneItemInGird ? 0.5 :  0.3,  // Adjust to show multiple items
-                            autoPlay: !isHovered,
-                            autoPlayInterval: Duration(milliseconds: 0),  // Adjust to set the time between each slide
-                            autoPlayAnimationDuration: Duration(milliseconds: 600),
-                            scrollPhysics: NeverScrollableScrollPhysics(),
-                            autoPlayCurve: Curves.linear,
-                          ),
-                          itemBuilder: (context, index, realIndex) {
-                            return MouseRegion(
-                              onEnter: (_) => setState(() => hoveredIndex = index),
-                              onExit: (_) => setState(() => hoveredIndex = null),
-                              child: buildItem(
-                                homeCubit.expertiseItems[index]["title"]!,
-                                homeCubit.expertiseItems[index]["iconPath"]!,
-                                mobileView,
-                                homeCubit,
-                                homeCubit.expertiseItems[index]["expertiseUrls"]!,
-                                isHovered: hoveredIndex == index,
-                              ),
+                          physics: NeverScrollableScrollPhysics(),
+                          itemBuilder: (context, index) {
+                            return buildItem2(
+                              homeCubit.expertiseItems[index]["title"]!,
+                              homeCubit.expertiseItems[index]["iconPath"]!,
+                              mobileView,
+                              homeCubit,
+                              homeCubit.expertiseItems[index]["expertiseUrls"]!,
                             );
                           },
                         ),
                       ),
-                    ),
-
-
+                    ] else ...[
+                      MouseRegion(
+                        onEnter: (_) {
+                          print("I am in");
+                          homeCubit.setIsHoveredExpertise(true);
+                          print(homeCubit.state.isHoveredProjectCard);
+                        },
+                        onExit: (_) {
+                          print("I am out");
+                          homeCubit.setIsHoveredExpertise(false);
+                          homeCubit.setIsHoveredIndexExpertise(null);
+                          print(homeCubit.state.isHoveredProjectCard);
+                        },
+                        child: Container(
+                          width: mobileView ? 1.sw : 0.78.sw,
+                          height: 200,
+                          child: CarouselSlider.builder(
+                            itemCount: homeCubit.expertiseItems.length,
+                            options: CarouselOptions(
+                              height: 200,
+                              enableInfiniteScroll: true,
+                              viewportFraction: mobileView
+                                  ? 0.8
+                                  : oneItemInGird
+                                      ? 0.5
+                                      : 0.3,
+                              // Adjust to show multiple items
+                              autoPlay: !homeCubit.state.isHoveredProjectCard,
+                              //!isHovered,
+                              autoPlayInterval: Duration(milliseconds: 0),
+                              autoPlayAnimationDuration:
+                                  Duration(milliseconds: 600),
+                              scrollPhysics: NeverScrollableScrollPhysics(),
+                              autoPlayCurve: Curves.linear,
+                            ),
+                            itemBuilder: (context, index, realIndex) {
+                              return MouseRegion(
+                                onEnter: (_) =>
+                                    homeCubit.setIsHoveredIndexExpertise(index),
+                                onExit: (_) =>
+                                    homeCubit.setIsHoveredIndexExpertise(null),
+                                child: buildItem(
+                                  homeCubit.expertiseItems[index]["title"]!,
+                                  homeCubit.expertiseItems[index]["iconPath"]!,
+                                  mobileView,
+                                  homeCubit,
+                                  homeCubit.expertiseItems[index]
+                                      ["expertiseUrls"]!,
+                                  isHovered:
+                                      homeCubit.state.hoveredIndex == index,
+                                ),
+                              );
+                            },
+                          ),
+                        ),
+                      ),
+                    ],
                     Gap(mobileView ? screenHeight * 0.075 : screenHeight * 0.1),
                     Text(
                       Strings.projectHeading,
@@ -342,7 +362,7 @@ class _HomeScreenState extends State<HomeScreen>
               mainAxisSize: MainAxisSize.min,
               children: [
                 SizedBox(
-                  child: contactUsFormWidgetView(mobileView,homeCubit),
+                  child: contactUsFormWidgetView(mobileView, homeCubit),
                 ),
                 Gap(mobileView ? 30.h : 30),
                 SizedBox(
@@ -364,7 +384,7 @@ class _HomeScreenState extends State<HomeScreen>
                 Gap(mobileView ? 30.w : 30),
                 Expanded(
                   flex: 1,
-                  child: contactUsFormWidgetView(mobileView,homeCubit),
+                  child: contactUsFormWidgetView(mobileView, homeCubit),
                 ),
               ],
             ),
@@ -410,9 +430,9 @@ class _HomeScreenState extends State<HomeScreen>
         ),
         SizedBox(height: mobileView ? 24.h : 24),
         ElevatedButton(
-          onPressed: () async{
-            if(homeCubit.emailTextController.text.trim().isNotEmpty)
-            await homeCubit.submitUserResponseData();
+          onPressed: () async {
+            if (homeCubit.emailTextController.text.trim().isNotEmpty)
+              await homeCubit.submitUserResponseData();
             // homeCubit.fetchAndPrintMessages();
           },
           style: ElevatedButton.styleFrom(
@@ -694,7 +714,8 @@ class _HomeScreenState extends State<HomeScreen>
                       itemCount: homeCubit.experienceItems.length,
                       itemBuilder: (context, index) {
                         return Padding(
-                          padding: EdgeInsets.only(bottom:mobileView ? 8.h : 8),
+                          padding:
+                              EdgeInsets.only(bottom: mobileView ? 8.h : 8),
                           child: ExperienceStep(
                             companyLogo: homeCubit.experienceItems[index]
                                 ["companyLogo"]!,
@@ -744,7 +765,8 @@ class _HomeScreenState extends State<HomeScreen>
                       itemCount: homeCubit.educationItems.length,
                       itemBuilder: (context, index) {
                         return Padding(
-                          padding: EdgeInsets.only(bottom: mobileView ? 8.h : 8),
+                          padding:
+                              EdgeInsets.only(bottom: mobileView ? 8.h : 8),
                           child: ExperienceStep(
                             companyLogo: homeCubit.educationItems[index]
                                 ["companyLogo"]!,
@@ -974,19 +996,21 @@ class _HomeScreenState extends State<HomeScreen>
     );
   }
 
-  Widget buildItem(
-      String title, String iconPath, bool mobileView, HomeCubit homeCubit, String expertiseUrls, {required bool isHovered}) {
+  Widget buildItem(String title, String iconPath, bool mobileView,
+      HomeCubit homeCubit, String expertiseUrls,
+      {required bool isHovered}) {
     return Container(
       width: 180,
       margin: EdgeInsets.symmetric(horizontal: mobileView ? 10.w : 10),
       padding: EdgeInsets.symmetric(
           horizontal: mobileView ? 16.w : 16, vertical: mobileView ? 16.h : 16),
       decoration: BoxDecoration(
-          color: isHovered ? Colors.white30 : Colors.black54,
-          borderRadius: BorderRadius.circular(mobileView ? 15.r : 15),
-          border: Border.all(color: Colors.grey)),
+        color: isHovered ? Colors.white30 : Colors.black54,
+        borderRadius: BorderRadius.circular(mobileView ? 15.r : 15),
+        border: Border.all(color: Colors.grey),
+      ),
       child: InkWell(
-        onTap: () async{
+        onTap: () async {
           await homeCubit.openWebUrls(expertiseUrls);
         },
         child: Column(
@@ -1003,6 +1027,35 @@ class _HomeScreenState extends State<HomeScreen>
             ),
           ],
         ),
+      ),
+    );
+  }
+
+  Widget buildItem2(String title, String iconPath, bool mobileView,
+      HomeCubit homeCubit, String expertiseUrls) {
+    return Container(
+      width: 180,
+      margin: EdgeInsets.symmetric(horizontal: mobileView ? 10.w : 10),
+      padding: EdgeInsets.symmetric(
+          horizontal: mobileView ? 16.w : 16, vertical: mobileView ? 16.h : 16),
+      decoration: BoxDecoration(
+        color: Colors.black54,
+        borderRadius: BorderRadius.circular(mobileView ? 15.r : 15),
+        border: Border.all(color: Colors.grey),
+      ),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          ClipRRect(
+            borderRadius: BorderRadius.circular(mobileView ? 8.r : 8),
+            child: Image.asset(iconPath, height: mobileView ? 80.w : 80),
+          ), // Icon image
+          SizedBox(height: mobileView ? 15.h : 15),
+          Text(
+            title,
+            style: AppTextStyles.body2SemiBoldWhite,
+          ),
+        ],
       ),
     );
   }

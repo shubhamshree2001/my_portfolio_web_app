@@ -13,6 +13,8 @@ abstract class _$HomeStateCWProxy {
 
   HomeState isHoveredProjectCard(bool isHoveredProjectCard);
 
+  HomeState hoveredIndex(int? hoveredIndex);
+
   /// This function **does support** nullification of nullable fields. All `null` values passed to `non-nullable` fields will be ignored. You can also use `HomeState(...).copyWith.fieldName(...)` to override fields one at a time with nullification support.
   ///
   /// Usage
@@ -23,6 +25,7 @@ abstract class _$HomeStateCWProxy {
     bool? isLoading,
     bool? isPageScrollingUp,
     bool? isHoveredProjectCard,
+    int? hoveredIndex,
   });
 }
 
@@ -44,6 +47,9 @@ class _$HomeStateCWProxyImpl implements _$HomeStateCWProxy {
       this(isHoveredProjectCard: isHoveredProjectCard);
 
   @override
+  HomeState hoveredIndex(int? hoveredIndex) => this(hoveredIndex: hoveredIndex);
+
+  @override
 
   /// This function **does support** nullification of nullable fields. All `null` values passed to `non-nullable` fields will be ignored. You can also use `HomeState(...).copyWith.fieldName(...)` to override fields one at a time with nullification support.
   ///
@@ -55,6 +61,7 @@ class _$HomeStateCWProxyImpl implements _$HomeStateCWProxy {
     Object? isLoading = const $CopyWithPlaceholder(),
     Object? isPageScrollingUp = const $CopyWithPlaceholder(),
     Object? isHoveredProjectCard = const $CopyWithPlaceholder(),
+    Object? hoveredIndex = const $CopyWithPlaceholder(),
   }) {
     return HomeState(
       isLoading: isLoading == const $CopyWithPlaceholder() || isLoading == null
@@ -72,6 +79,10 @@ class _$HomeStateCWProxyImpl implements _$HomeStateCWProxy {
               ? _value.isHoveredProjectCard
               // ignore: cast_nullable_to_non_nullable
               : isHoveredProjectCard as bool,
+      hoveredIndex: hoveredIndex == const $CopyWithPlaceholder()
+          ? _value.hoveredIndex
+          // ignore: cast_nullable_to_non_nullable
+          : hoveredIndex as int?,
     );
   }
 }

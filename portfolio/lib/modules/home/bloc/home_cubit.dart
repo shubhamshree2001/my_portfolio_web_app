@@ -30,14 +30,16 @@ class HomeCubit extends Cubit<HomeState> {
       isPageScrollingUp: isPageScrollingUp,
     ));
   }
-  void setIsHoveredProjectCard(bool? isHoveredProjectCard) {
+
+  void setIsHoveredExpertise(bool? isHoveredProjectCard) {
     emit(state.copyWith(
       isHoveredProjectCard: isHoveredProjectCard,
     ));
   }
-  void setIsHoveredProjectCardAlternate() {
+
+  void setIsHoveredIndexExpertise(int? hoveredIndex) {
     emit(state.copyWith(
-      isHoveredProjectCard: !state.isHoveredProjectCard,
+      hoveredIndex: hoveredIndex,
     ));
   }
 
