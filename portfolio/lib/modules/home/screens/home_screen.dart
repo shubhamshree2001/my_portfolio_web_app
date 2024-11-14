@@ -33,6 +33,7 @@ class _HomeScreenState extends State<HomeScreen>
   Timer? expertiseAutoScrollTimer;
   bool isPageScrollingUp = false;
   bool isHovered = false;
+  int? hoveredIndex;
   GlobalKey one = GlobalKey();
   GlobalKey two = GlobalKey();
   GlobalKey three = GlobalKey();
@@ -227,7 +228,10 @@ class _HomeScreenState extends State<HomeScreen>
                     // ),
                     MouseRegion(
                       onEnter: (_) =>  setState(() => isHovered = true),
-                      onExit: (_) => setState(() => isHovered = false),
+                      onExit: (_) => setState(() {
+                        isHovered = false;
+                        hoveredIndex = null; // Reset hovered index when leaving the carousel
+                      }),
                       child: Container(
                         width: mobileView ? 1.sw : 0.78.sw,
                         height: 200,
@@ -244,12 +248,17 @@ class _HomeScreenState extends State<HomeScreen>
                             autoPlayCurve: Curves.linear,
                           ),
                           itemBuilder: (context, index, realIndex) {
-                            return buildItem(
-                              homeCubit.expertiseItems[index]["title"]!,
-                              homeCubit.expertiseItems[index]["iconPath"]!,
-                              mobileView,
-                              homeCubit,
-                              homeCubit.expertiseItems[index]["expertiseUrls"]!,
+                            return MouseRegion(
+                              onEnter: (_) => setState(() => hoveredIndex = index),
+                              onExit: (_) => setState(() => hoveredIndex = null),
+                              child: buildItem(
+                                homeCubit.expertiseItems[index]["title"]!,
+                                homeCubit.expertiseItems[index]["iconPath"]!,
+                                mobileView,
+                                homeCubit,
+                                homeCubit.expertiseItems[index]["expertiseUrls"]!,
+                                isHovered: hoveredIndex == index,
+                              ),
                             );
                           },
                         ),
@@ -966,14 +975,14 @@ class _HomeScreenState extends State<HomeScreen>
   }
 
   Widget buildItem(
-      String title, String iconPath, bool mobileView, HomeCubit homeCubit, String expertiseUrls) {
+      String title, String iconPath, bool mobileView, HomeCubit homeCubit, String expertiseUrls, {required bool isHovered}) {
     return Container(
       width: 180,
       margin: EdgeInsets.symmetric(horizontal: mobileView ? 10.w : 10),
       padding: EdgeInsets.symmetric(
           horizontal: mobileView ? 16.w : 16, vertical: mobileView ? 16.h : 16),
       decoration: BoxDecoration(
-          color: Colors.black54,
+          color: isHovered ? Colors.white30 : Colors.black54,
           borderRadius: BorderRadius.circular(mobileView ? 15.r : 15),
           border: Border.all(color: Colors.grey)),
       child: InkWell(
