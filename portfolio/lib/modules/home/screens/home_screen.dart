@@ -56,8 +56,7 @@ class _HomeScreenState extends State<HomeScreen>
   }
 
   void startAutoScroll() {
-    expertiseAutoScrollTimer =
-        Timer.periodic(Duration(milliseconds: 100), (timer) {
+    expertiseAutoScrollTimer = Timer.periodic(Duration(milliseconds: 50), (timer) {
       if (expertiseScrollController.hasClients) {
         double maxScroll = expertiseScrollController.position.maxScrollExtent;
         double currentScroll = expertiseScrollController.offset;
@@ -65,8 +64,8 @@ class _HomeScreenState extends State<HomeScreen>
           expertiseScrollController.jumpTo(0);
         }
         expertiseScrollController.animateTo(
-          expertiseScrollController.offset + 2.0,
-          duration: Duration(milliseconds: 100),
+          expertiseScrollController.offset + 4.0, // Increased offset
+          duration: Duration(milliseconds: 50), // Reduced duration for faster scroll
           curve: Curves.linear,
         );
       }
@@ -214,6 +213,7 @@ class _HomeScreenState extends State<HomeScreen>
                         controller: expertiseScrollController,
                         scrollDirection: Axis.horizontal,
                         itemCount: homeCubit.expertiseItems.length,
+                        physics: NeverScrollableScrollPhysics(),
                         itemBuilder: (context, index) {
                           return buildItem(
                             homeCubit.expertiseItems[index]["title"]!,
@@ -301,7 +301,7 @@ class _HomeScreenState extends State<HomeScreen>
               mainAxisSize: MainAxisSize.min,
               children: [
                 SizedBox(
-                  child: contactUsFormWidgetView(mobileView),
+                  child: contactUsFormWidgetView(mobileView,homeCubit),
                 ),
                 Gap(mobileView ? 30.h : 30),
                 SizedBox(
@@ -323,14 +323,14 @@ class _HomeScreenState extends State<HomeScreen>
                 Gap(mobileView ? 30.w : 30),
                 Expanded(
                   flex: 1,
-                  child: contactUsFormWidgetView(mobileView),
+                  child: contactUsFormWidgetView(mobileView,homeCubit),
                 ),
               ],
             ),
     );
   }
 
-  Widget contactUsFormWidgetView(bool mobileView) {
+  Widget contactUsFormWidgetView(bool mobileView, HomeCubit homeCubit) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       mainAxisAlignment: MainAxisAlignment.start,
@@ -345,28 +345,34 @@ class _HomeScreenState extends State<HomeScreen>
         ContactFormField(
           label: Strings.nameText,
           hintText: Strings.name,
+          textEditingController: homeCubit.nameTextController,
         ),
         SizedBox(height: mobileView ? 16.h : 16),
         ContactFormField(
           label: Strings.emailSubText,
           hintText: Strings.emaiId,
           keyboardType: TextInputType.emailAddress,
+          textEditingController: homeCubit.emailTextController,
         ),
         SizedBox(height: mobileView ? 16.h : 16),
         ContactFormField(
           label: Strings.subjectText,
           hintText: Strings.subject,
+          textEditingController: homeCubit.subjectTextController,
         ),
         SizedBox(height: mobileView ? 16.h : 16),
         ContactFormField(
           label: Strings.messageText,
           hintText: Strings.message,
           maxLines: 4,
+          textEditingController: homeCubit.messageTextController,
         ),
         SizedBox(height: mobileView ? 24.h : 24),
         ElevatedButton(
-          onPressed: () {
-            // Handle form submission
+          onPressed: () async{
+            if(homeCubit.emailTextController.text.trim().isNotEmpty)
+            await homeCubit.submitUserResponseData();
+            // homeCubit.fetchAndPrintMessages();
           },
           style: ElevatedButton.styleFrom(
             backgroundColor: Colors.black,
@@ -561,30 +567,6 @@ class _HomeScreenState extends State<HomeScreen>
                         );
                       }),
                     ),
-
-                    // ListView.builder(
-                    //   shrinkWrap: true,
-                    //   itemCount: homeCubit.experienceItems.length,
-                    //   itemBuilder: (context, index) {
-                    //     return Padding(
-                    //       padding:
-                    //           EdgeInsets.only(bottom: mobileView ? 8.h : 8),
-                    //       child: ExperienceStep(
-                    //         companyLogo: homeCubit.experienceItems[index]
-                    //             ["companyLogo"]!,
-                    //         companyName: homeCubit.experienceItems[index]
-                    //             ["companyName"]!,
-                    //         duration: homeCubit.experienceItems[index]
-                    //             ["duration"]!,
-                    //         role: homeCubit.experienceItems[index]["role"]!,
-                    //         location: homeCubit.experienceItems[index]
-                    //             ["location"]!,
-                    //         description: homeCubit.experienceItems[index]
-                    //             ["description"]!,
-                    //       ),
-                    //     );
-                    //   },
-                    // ),
                   ],
                 ),
               ),
@@ -633,27 +615,6 @@ class _HomeScreenState extends State<HomeScreen>
                         );
                       }),
                     ),
-                    // ListView.builder(
-                    //   shrinkWrap: true,
-                    //   itemCount: homeCubit.educationItems.length,
-                    //   itemBuilder: (context, index) {
-                    //     return Padding(
-                    //       padding:
-                    //           EdgeInsets.only(bottom: mobileView ? 8.h : 8),
-                    //       child: ExperienceStep(
-                    //         companyLogo: homeCubit.educationItems[index]
-                    //             ["companyLogo"]!,
-                    //         companyName: homeCubit.educationItems[index]
-                    //             ["companyName"]!,
-                    //         duration: homeCubit.educationItems[index]
-                    //             ["duration"]!,
-                    //         role: homeCubit.educationItems[index]["role"]!,
-                    //         location: homeCubit.educationItems[index]
-                    //             ["location"]!,
-                    //       ),
-                    //     );
-                    //   },
-                    // ),
                   ],
                 ),
               ),

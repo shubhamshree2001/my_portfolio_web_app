@@ -6,8 +6,10 @@ class ContactFormField extends StatelessWidget {
   final String hintText;
   final TextInputType? keyboardType;
   final int maxLines;
+  final TextEditingController textEditingController;
 
   ContactFormField({
+    required this.textEditingController,
     required this.label,
     required this.hintText,
     this.keyboardType,
@@ -24,7 +26,8 @@ class ContactFormField extends StatelessWidget {
           style: AppTextStyles.body2RegularWhite,
         ),
         SizedBox(height: 8),
-        TextFormField(
+        TextField(
+          controller: textEditingController,
           keyboardType: keyboardType,
           maxLines: maxLines,
           style: TextStyle(color: Colors.white),
