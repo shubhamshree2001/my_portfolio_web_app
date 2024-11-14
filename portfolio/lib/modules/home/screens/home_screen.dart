@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:ui';
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -157,7 +158,6 @@ class _HomeScreenState extends State<HomeScreen>
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Gap(mobileView ? screenHeight * 0.1 : screenHeight * 0.2),
-                    //150
                     Text(
                       Strings.nameIntro,
                       style: AppTextStyles.heading1White,
@@ -206,25 +206,57 @@ class _HomeScreenState extends State<HomeScreen>
                       style: AppTextStyles.heading1800White,
                     ),
                     Gap(mobileView ? screenHeight * 0.05 : screenHeight * 0.1),
-                    Container(
-                      width: mobileView ? 1.sw : 0.78.sw,
-                      height: 200,
-                      child: ListView.builder(
-                        controller: expertiseScrollController,
-                        scrollDirection: Axis.horizontal,
-                        itemCount: homeCubit.expertiseItems.length,
-                        physics: NeverScrollableScrollPhysics(),
-                        itemBuilder: (context, index) {
-                          return buildItem(
-                            homeCubit.expertiseItems[index]["title"]!,
-                            homeCubit.expertiseItems[index]["iconPath"]!,
-                            mobileView,
-                            homeCubit,
-                            homeCubit.expertiseItems[index]["expertiseUrls"]!,
-                          );
-                        },
+                    // Container(
+                    //   width: mobileView ? 1.sw : 0.78.sw,
+                    //   height: 200,
+                    //   child: ListView.builder(
+                    //     controller: expertiseScrollController,
+                    //     scrollDirection: Axis.horizontal,
+                    //     itemCount: homeCubit.expertiseItems.length,
+                    //     physics: NeverScrollableScrollPhysics(),
+                    //     itemBuilder: (context, index) {
+                    //       return buildItem(
+                    //         homeCubit.expertiseItems[index]["title"]!,
+                    //         homeCubit.expertiseItems[index]["iconPath"]!,
+                    //         mobileView,
+                    //         homeCubit,
+                    //         homeCubit.expertiseItems[index]["expertiseUrls"]!,
+                    //       );
+                    //     },
+                    //   ),
+                    // ),
+                    MouseRegion(
+                      onEnter: (_) =>  setState(() => isHovered = true),
+                      onExit: (_) => setState(() => isHovered = false),
+                      child: Container(
+                        width: mobileView ? 1.sw : 0.78.sw,
+                        height: 200,
+                        child: CarouselSlider.builder(
+                          itemCount: homeCubit.expertiseItems.length,
+                          options: CarouselOptions(
+                            height: 200,
+                            enableInfiniteScroll: true,
+                            viewportFraction: mobileView ? 0.8 : oneItemInGird ? 0.5 :  0.3,  // Adjust to show multiple items
+                            autoPlay: !isHovered,
+                            autoPlayInterval: Duration(milliseconds: 0),  // Adjust to set the time between each slide
+                            autoPlayAnimationDuration: Duration(milliseconds: 600),
+                            scrollPhysics: NeverScrollableScrollPhysics(),
+                            autoPlayCurve: Curves.linear,
+                          ),
+                          itemBuilder: (context, index, realIndex) {
+                            return buildItem(
+                              homeCubit.expertiseItems[index]["title"]!,
+                              homeCubit.expertiseItems[index]["iconPath"]!,
+                              mobileView,
+                              homeCubit,
+                              homeCubit.expertiseItems[index]["expertiseUrls"]!,
+                            );
+                          },
+                        ),
                       ),
                     ),
+
+
                     Gap(mobileView ? screenHeight * 0.075 : screenHeight * 0.1),
                     Text(
                       Strings.projectHeading,
@@ -935,7 +967,6 @@ class _HomeScreenState extends State<HomeScreen>
 
   Widget buildItem(
       String title, String iconPath, bool mobileView, HomeCubit homeCubit, String expertiseUrls) {
-    //  await homeCubit.openWebUrls(expertiseUrls);
     return Container(
       width: 180,
       margin: EdgeInsets.symmetric(horizontal: mobileView ? 10.w : 10),
@@ -945,19 +976,24 @@ class _HomeScreenState extends State<HomeScreen>
           color: Colors.black54,
           borderRadius: BorderRadius.circular(mobileView ? 15.r : 15),
           border: Border.all(color: Colors.grey)),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          ClipRRect(
-            borderRadius: BorderRadius.circular(mobileView ? 8.r : 8),
-            child: Image.asset(iconPath, height: mobileView ? 80.w : 80),
-          ), // Icon image
-          SizedBox(height: mobileView ? 15.h : 15),
-          Text(
-            title,
-            style: AppTextStyles.body2SemiBoldWhite,
-          ),
-        ],
+      child: InkWell(
+        onTap: () async{
+          await homeCubit.openWebUrls(expertiseUrls);
+        },
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            ClipRRect(
+              borderRadius: BorderRadius.circular(mobileView ? 8.r : 8),
+              child: Image.asset(iconPath, height: mobileView ? 80.w : 80),
+            ), // Icon image
+            SizedBox(height: mobileView ? 15.h : 15),
+            Text(
+              title,
+              style: AppTextStyles.body2SemiBoldWhite,
+            ),
+          ],
+        ),
       ),
     );
   }

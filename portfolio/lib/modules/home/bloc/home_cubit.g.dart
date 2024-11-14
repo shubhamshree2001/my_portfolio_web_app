@@ -11,6 +11,8 @@ abstract class _$HomeStateCWProxy {
 
   HomeState isPageScrollingUp(bool isPageScrollingUp);
 
+  HomeState isHoveredProjectCard(bool isHoveredProjectCard);
+
   /// This function **does support** nullification of nullable fields. All `null` values passed to `non-nullable` fields will be ignored. You can also use `HomeState(...).copyWith.fieldName(...)` to override fields one at a time with nullification support.
   ///
   /// Usage
@@ -20,6 +22,7 @@ abstract class _$HomeStateCWProxy {
   HomeState call({
     bool? isLoading,
     bool? isPageScrollingUp,
+    bool? isHoveredProjectCard,
   });
 }
 
@@ -37,6 +40,10 @@ class _$HomeStateCWProxyImpl implements _$HomeStateCWProxy {
       this(isPageScrollingUp: isPageScrollingUp);
 
   @override
+  HomeState isHoveredProjectCard(bool isHoveredProjectCard) =>
+      this(isHoveredProjectCard: isHoveredProjectCard);
+
+  @override
 
   /// This function **does support** nullification of nullable fields. All `null` values passed to `non-nullable` fields will be ignored. You can also use `HomeState(...).copyWith.fieldName(...)` to override fields one at a time with nullification support.
   ///
@@ -47,6 +54,7 @@ class _$HomeStateCWProxyImpl implements _$HomeStateCWProxy {
   HomeState call({
     Object? isLoading = const $CopyWithPlaceholder(),
     Object? isPageScrollingUp = const $CopyWithPlaceholder(),
+    Object? isHoveredProjectCard = const $CopyWithPlaceholder(),
   }) {
     return HomeState(
       isLoading: isLoading == const $CopyWithPlaceholder() || isLoading == null
@@ -58,6 +66,12 @@ class _$HomeStateCWProxyImpl implements _$HomeStateCWProxy {
           ? _value.isPageScrollingUp
           // ignore: cast_nullable_to_non_nullable
           : isPageScrollingUp as bool,
+      isHoveredProjectCard:
+          isHoveredProjectCard == const $CopyWithPlaceholder() ||
+                  isHoveredProjectCard == null
+              ? _value.isHoveredProjectCard
+              // ignore: cast_nullable_to_non_nullable
+              : isHoveredProjectCard as bool,
     );
   }
 }

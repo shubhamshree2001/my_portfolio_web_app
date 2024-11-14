@@ -30,6 +30,16 @@ class HomeCubit extends Cubit<HomeState> {
       isPageScrollingUp: isPageScrollingUp,
     ));
   }
+  void setIsHoveredProjectCard(bool? isHoveredProjectCard) {
+    emit(state.copyWith(
+      isHoveredProjectCard: isHoveredProjectCard,
+    ));
+  }
+  void setIsHoveredProjectCardAlternate() {
+    emit(state.copyWith(
+      isHoveredProjectCard: !state.isHoveredProjectCard,
+    ));
+  }
 
   Future<void> openWebUrls(String url) async {
     try {
