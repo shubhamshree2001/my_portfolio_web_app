@@ -8,7 +8,7 @@ class URLs {
   static const githubLink = "https://github.com/shubhamshree2001";
   static const twitterLink = "https://x.com/__shubham__01";
   static const linkedInlink =  "https://www.linkedin.com/in/shubhamshree01/";
-  static const instaLink = "";
+  static const instaLink = "https://www.instagram.com/_shubh._01/";
   static const ambeeUrls = "https://www.linkedin.com/company/getambee/mycompany/";
   static const aistheticUrls = "https://www.linkedin.com/company/aisthetic/posts/?feedView=all";
   static const mindpeersUrls = "https://www.linkedin.com/company/mindpeersco/posts/?feedView=all";

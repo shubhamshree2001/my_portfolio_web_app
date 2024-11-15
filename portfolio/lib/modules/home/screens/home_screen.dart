@@ -231,6 +231,8 @@ class _HomeScreenState extends State<HomeScreen>
                       ),
                     ] else ...[
                       MouseRegion(
+                        hitTestBehavior: HitTestBehavior.translucent,
+                        opaque: false,
                         onEnter: (_) {
                           print("I am in");
                           homeCubit.setIsHoveredExpertise(true);
@@ -266,6 +268,8 @@ class _HomeScreenState extends State<HomeScreen>
                             ),
                             itemBuilder: (context, index, realIndex) {
                               return MouseRegion(
+                                hitTestBehavior: HitTestBehavior.translucent,
+                                opaque: false,
                                 onEnter: (_) =>
                                     homeCubit.setIsHoveredIndexExpertise(index),
                                 onExit: (_) =>
@@ -605,8 +609,13 @@ class _HomeScreenState extends State<HomeScreen>
                     ),
                     Gap(mobileView ? 30.h : 30),
                     Column(
-                      children: List.generate(homeCubit.experienceItems.length,
-                          (index) {
+                      children: List.generate(
+                          homeCubit.state.showMoreExperience
+                              ? homeCubit.experienceItems.length
+                              : homeCubit.experienceItems.length - 2, (index) {
+                        final experience = homeCubit.experienceItems[index];
+                        final apps =
+                            experience["apps"] as List<Map<String, String>>;
                         return Padding(
                           padding:
                               EdgeInsets.only(bottom: mobileView ? 8.h : 8),
@@ -624,10 +633,29 @@ class _HomeScreenState extends State<HomeScreen>
                                 ["description"]!,
                             urls: homeCubit.experienceItems[index]
                                 ["organizationUrls"]!,
+                            itemCount: apps.length,
+                            experienceApps: apps,
                           ),
                         );
                       }),
                     ),
+                    if (!homeCubit.state.showMoreExperience) ...[
+                      Gap(mobileView ? 10.h : 10),
+                      InkWell(
+                        onTap: () {
+                          homeCubit.setShowMoreExperience(true);
+                        },
+                        child: Tooltip(
+                          message: "Show Two More",
+                          textStyle: AppTextStyles.bodySemiBoldWhite,
+                          child: Icon(
+                            Icons.more_horiz,
+                            color: AppColors.white,
+                            size: mobileView ? 30.w : 30,
+                          ),
+                        ),
+                      )
+                    ],
                   ],
                 ),
               ),
@@ -711,8 +739,13 @@ class _HomeScreenState extends State<HomeScreen>
                     Gap(30),
                     ListView.builder(
                       shrinkWrap: true,
-                      itemCount: homeCubit.experienceItems.length,
+                      itemCount: homeCubit.state.showMoreExperience
+                          ? homeCubit.experienceItems.length
+                          : homeCubit.experienceItems.length - 2,
                       itemBuilder: (context, index) {
+                        final experience = homeCubit.experienceItems[index];
+                        final apps =
+                            experience["apps"] as List<Map<String, String>>;
                         return Padding(
                           padding:
                               EdgeInsets.only(bottom: mobileView ? 8.h : 8),
@@ -730,10 +763,29 @@ class _HomeScreenState extends State<HomeScreen>
                                 ["description"]!,
                             urls: homeCubit.experienceItems[index]
                                 ["organizationUrls"]!,
+                            itemCount: apps.length,
+                            experienceApps: apps,
                           ),
                         );
                       },
                     ),
+                    if (!homeCubit.state.showMoreExperience) ...[
+                      Gap(mobileView ? 10.h : 10),
+                      InkWell(
+                        onTap: () {
+                          homeCubit.setShowMoreExperience(true);
+                        },
+                        child: Tooltip(
+                          message: "Show Two More",
+                          textStyle: AppTextStyles.bodySemiBoldWhite,
+                          child: Icon(
+                            Icons.more_horiz,
+                            color: AppColors.white,
+                            size: mobileView ? 30.w : 30,
+                          ),
+                        ),
+                      )
+                    ],
                   ],
                 ),
               ),

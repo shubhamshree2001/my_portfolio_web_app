@@ -15,6 +15,8 @@ abstract class _$HomeStateCWProxy {
 
   HomeState hoveredIndex(int? hoveredIndex);
 
+  HomeState showMoreExperience(bool showMoreExperience);
+
   /// This function **does support** nullification of nullable fields. All `null` values passed to `non-nullable` fields will be ignored. You can also use `HomeState(...).copyWith.fieldName(...)` to override fields one at a time with nullification support.
   ///
   /// Usage
@@ -26,6 +28,7 @@ abstract class _$HomeStateCWProxy {
     bool? isPageScrollingUp,
     bool? isHoveredProjectCard,
     int? hoveredIndex,
+    bool? showMoreExperience,
   });
 }
 
@@ -50,6 +53,10 @@ class _$HomeStateCWProxyImpl implements _$HomeStateCWProxy {
   HomeState hoveredIndex(int? hoveredIndex) => this(hoveredIndex: hoveredIndex);
 
   @override
+  HomeState showMoreExperience(bool showMoreExperience) =>
+      this(showMoreExperience: showMoreExperience);
+
+  @override
 
   /// This function **does support** nullification of nullable fields. All `null` values passed to `non-nullable` fields will be ignored. You can also use `HomeState(...).copyWith.fieldName(...)` to override fields one at a time with nullification support.
   ///
@@ -62,6 +69,7 @@ class _$HomeStateCWProxyImpl implements _$HomeStateCWProxy {
     Object? isPageScrollingUp = const $CopyWithPlaceholder(),
     Object? isHoveredProjectCard = const $CopyWithPlaceholder(),
     Object? hoveredIndex = const $CopyWithPlaceholder(),
+    Object? showMoreExperience = const $CopyWithPlaceholder(),
   }) {
     return HomeState(
       isLoading: isLoading == const $CopyWithPlaceholder() || isLoading == null
@@ -83,6 +91,11 @@ class _$HomeStateCWProxyImpl implements _$HomeStateCWProxy {
           ? _value.hoveredIndex
           // ignore: cast_nullable_to_non_nullable
           : hoveredIndex as int?,
+      showMoreExperience: showMoreExperience == const $CopyWithPlaceholder() ||
+              showMoreExperience == null
+          ? _value.showMoreExperience
+          // ignore: cast_nullable_to_non_nullable
+          : showMoreExperience as bool,
     );
   }
 }

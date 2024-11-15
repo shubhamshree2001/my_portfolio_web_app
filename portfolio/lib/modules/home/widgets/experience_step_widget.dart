@@ -13,6 +13,8 @@ class ExperienceStep extends StatefulWidget {
   final String location;
   final String? description;
   final String? urls;
+  final int? itemCount;
+  final List<Map<String, String>>? experienceApps;
 
   ExperienceStep({
     required this.companyLogo,
@@ -22,6 +24,8 @@ class ExperienceStep extends StatefulWidget {
     required this.location,
     this.description,
     this.urls,
+    this.itemCount,
+    this.experienceApps,
   });
 
   @override
@@ -131,7 +135,7 @@ class _ExperienceStepState extends State<ExperienceStep>
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         InkWell(
-                          onTap  : () async {
+                          onTap: () async {
                             await homeCubit.openWebUrls(widget.urls ?? "");
                           },
                           child: ClipRRect(
@@ -178,11 +182,65 @@ class _ExperienceStepState extends State<ExperienceStep>
                         ),
                         if (widget.description != null &&
                             widget.description!.isNotEmpty) ...[
-                          SizedBox(height: mobileView ? 8.h : 8),
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children:
+                                List.generate(widget.itemCount ?? 0, (index) {
+                              return Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: [
+                                  SizedBox(height: mobileView ? 8.h : 8),
+                                  Row(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Text(
+                                        widget.experienceApps?[index]
+                                                ["appName"] ??
+                                            "", // "app name" ?? "",
+                                        style: AppTextStyles.bodySemiBoldWhite,
+                                      ),
+                                      if (widget
+                                              .experienceApps?[index]["appLink"]
+                                              ?.isNotEmpty ??
+                                          false)
+                                        InkWell(
+                                          onTap: () async {
+                                            await homeCubit.openWebUrls(
+                                                widget.experienceApps?[index]
+                                                        ["appLink"] ??
+                                                    "");
+                                          },
+                                          child: Text(
+                                            "View App" ?? "",
+                                            style: AppTextStyles
+                                                .bodySemiBoldWhite
+                                                .copyWith(
+                                                    color: Colors.greenAccent),
+                                          ),
+                                        ),
+                                    ],
+                                  ),
+                                  SizedBox(height: mobileView ? 4.h : 4),
+                                  Text(
+                                    widget.experienceApps?[index]
+                                            ["appDescription"] ??
+                                        "",
+                                    style: AppTextStyles.bodySemiBoldWhite
+                                        .copyWith(color: Colors.grey[400]),
+                                  ),
+                                ],
+                              );
+                            }),
+                          ),
+                          SizedBox(height: mobileView ? 4.h : 4),
                           Text(
                             widget.description ?? "",
-                            style: AppTextStyles.bodySemiBoldWhite
-                                .copyWith(color: Colors.grey[400]),
+                            style: AppTextStyles.bodySemiBoldWhite,
                           ),
                         ],
                       ],

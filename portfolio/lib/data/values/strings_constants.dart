@@ -12,14 +12,18 @@ class Strings {
   static const expenseApp = "Expense app";
   static const studyApp = "Study app";
   static const portfolio = "Portfolio Web App";
-  static const expenseAppDescription = "An expense app that helps users track daily spending and manage their budget effectively. Users can log expenses, categorize transactions, and monitor spending trends to stay within their budget.";
-  static const studyAppDescription = "A Study App for students up to class 10, offering subject materials and performance tracking with secure login for focused, personalized learning.";
-  static const portfolioDescription = "A Portfolio Web App designed to showcase projects, skills, and experience with a responsive and interactive layout. It features project galleries and skill displays, providing a professional, engaging digital portfolio for all platforms.";
+  static const expenseAppDescription =
+      "An expense app that helps users track daily spending and manage their budget effectively. Users can log expenses, categorize transactions, and monitor spending trends to stay within their budget.";
+  static const studyAppDescription =
+      "A Study App for students up to class 10, offering subject materials and performance tracking with secure login for focused, personalized learning.";
+  static const portfolioDescription =
+      "A Portfolio Web App designed to showcase projects, skills, and experience with a responsive and interactive layout. It features project galleries and skill displays, providing a professional, engaging digital portfolio for all platforms.";
   static const ambeeCompanyName = "Ambee (Datair Technology Private Limited)";
   static const ambeeDuration = "(Aug 2023 – Present)";
   static const ambeeRole = "Software Engineer";
   static const ambeeLocation = "Bangalore, India";
-  static const ambeeDescription = "Key Focus: Flutter, Dart, Firebase, GCP";
+  static const ambeeDescription =
+      "Key Focus: Bloc Cubit, Get It service, Flavors, Google and Apple sign in, OpenStreetMap leaflet, Notifications, Dynamic links.";
   static const aistheticCompanyname = "Aisthetic.co";
   static const aistheticDuration = "(Jan 2023 – Jul 2023)";
   static const aistheticRole = "Software Engineer";
@@ -29,19 +33,20 @@ class Strings {
   static const mindpeersDuration = "(Jun 2022 – Jul 2023)";
   static const mindpeersRole = "Software Engineer";
   static const mindpeersLocation = "Delhi, India";
-  static const mindpeersDescription = "Key Focus: Flutter, Dart, Firebase, GCP";
+  static const mindpeersDescription =
+      "Key Focus: GetX, Dependency Injecton, GetX routing, Mixins, Razorpay, GraphQl Codegen.";
   static const studyTableCompanyname = "Studytable Inc.";
   static const studyTableDuration = "(Mar 2022 – May 2022)";
   static const studyTableRole = "Software Engineer Intern";
   static const studyTableLocation = "Bangalore, India";
   static const studyTableDescription =
-      "Key Focus: Flutter, Dart, Firebase, GCP";
+      "Key Focus: State management, Firebase - auth, storage, crashlytics, analytics.";
   static const sparksFoundationCompanyname = "The Sparks Foundation";
   static const sparksFoundationDuration = "(Dec 2021 – Mar 2022)";
   static const sparksFoundationRole = "Mobile Application Development  Intern";
   static const sparksFoundationLocation = "Bangalore, India";
   static const sparksFoundationDescription =
-      "Key Focus: Flutter, Dart, Firebase, Auth, Analytics";
+      "Key Focus: Flutter, Dart, Firebase, Google Place APIs, GCP.";
   static const mvitName = "Sir M. Visvesvaraya Institute of Technology";
   static const mvitDuration = "(Aug 2018 – Jul 2022)";
   static const mvitRole =

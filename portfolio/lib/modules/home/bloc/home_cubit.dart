@@ -43,6 +43,12 @@ class HomeCubit extends Cubit<HomeState> {
     ));
   }
 
+  void setShowMoreExperience(bool showMoreExperience) {
+    emit(state.copyWith(
+      showMoreExperience: showMoreExperience,
+    ));
+  }
+
   Future<void> openWebUrls(String url) async {
     try {
       await launchUrl(Uri.parse(url));
@@ -156,7 +162,7 @@ class HomeCubit extends Cubit<HomeState> {
     },
   ];
 
-  final List<Map<String, String>> experienceItems = [
+  final List<Map<String, dynamic>> experienceItems = [
     {
       "companyLogo": AppImages.ambeeIcon,
       "companyName": Strings.ambeeCompanyName,
@@ -165,6 +171,23 @@ class HomeCubit extends Cubit<HomeState> {
       "location": Strings.ambeeLocation,
       "description": Strings.ambeeDescription,
       "organizationUrls": URLs.ambeeUrls,
+      "apps": [
+        {
+          "appName": "Ambee App",
+          "appLink": "https://play.google.com/store/search?q=ambee&c=apps",
+          "appDescription": "Ambee App provides real-time environmental data, including air quality, weather, and pollen insights, for better health and well-being."
+        },
+        {
+          "appName": "Aller Track App",
+          "appLink": "",
+          "appDescription": "AllerTrack App helps users monitor allergens, track symptoms, and manage allergy triggers for improved health and comfort."
+        },
+        {
+          "appName": "Allegra Airways Web App",
+          "appLink": "https://airways.allegra.com/",
+          "appDescription": "Allegra Airways offers optimized routing solutions by leveraging air quality and pollen data for a healthier travel experience."
+        }
+      ],
     },
     // {
     //   "companyLogo": AppImages.aistheticIcon,
@@ -183,6 +206,13 @@ class HomeCubit extends Cubit<HomeState> {
       "location": Strings.mindpeersLocation,
       "description": Strings.mindpeersDescription,
       "organizationUrls": URLs.mindpeersUrls,
+      "apps": [
+        {
+          "appName": "MindPeers App",
+          "appLink": "https://play.google.com/store/search?q=mindpeers&c=apps",
+          "appDescription": "Manage stress, relationships & anxiety with verified online therapy & counseling."
+        },
+      ],
     },
     {
       "companyLogo": AppImages.studyTableIcon,
@@ -192,6 +222,13 @@ class HomeCubit extends Cubit<HomeState> {
       "location": Strings.studyTableLocation,
       "description": Strings.studyTableDescription,
       "organizationUrls": URLs.studyTableUrls,
+      "apps": [
+        {
+          "appName": "StudyTable",
+          "appLink": "",
+          "appDescription": "StudyTable App helps students organize their study schedules and resources efficiently for better academic management."
+        },
+      ],
     },
     {
       "companyLogo": AppImages.sparksFoundationIcon,
@@ -201,6 +238,13 @@ class HomeCubit extends Cubit<HomeState> {
       "location": Strings.sparksFoundationLocation,
       "description": Strings.sparksFoundationDescription,
       "organizationUrls": URLs.sparksFoundationUrls,
+      "apps": [
+        {
+          "appName": "Kirana App",
+          "appLink": "", //"https://play.google.com/store/apps/details?id=com.flocco.app&hl=en_IN",
+          "appDescription": "Kirana App enables users to effortlessly shop for groceries from their trusted local Kirana stores."
+        },
+      ],
     },
   ];
 
