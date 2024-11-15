@@ -158,7 +158,7 @@ class HomeCubit extends Cubit<HomeState> {
       "title": Strings.portfolio,
       "iconPath": AppImages.portfolioIcon,
       "projectDescription": Strings.portfolioDescription,
-      "projectUrl": URLs.studyTable,
+      "projectUrl": URLs.portfolio,
     },
   ];
 
