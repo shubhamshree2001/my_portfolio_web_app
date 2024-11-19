@@ -64,7 +64,7 @@ class Strings {
   static const infantDuration = "(Apr 2003 – Mar 2012)";
   static const infantRole = "Elementary & Primary School, CBSE";
   static const infantLocation = "Patna, India";
-  static const nameIntro = "Hi, I'm Shubham, a Self Taught";
+  static const nameIntro = "Hi, I'm Shubham, a";
   static const introRole = "Software Developer";
   static const introLocation = "Based in Bangalore, India,";
   static const introSpecialied = "Specialized in Flutter";
