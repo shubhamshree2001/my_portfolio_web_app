@@ -174,12 +174,12 @@ class HomeCubit extends Cubit<HomeState> {
       "apps": [
         {
           "appName": "Ambee App",
-          "appLink": "https://play.google.com/store/search?q=ambee&c=apps",
+          "appLink": "https://play.google.com/store/apps/details?id=com.ambee.android",
           "appDescription": "Ambee App provides real-time environmental data, including air quality, weather, and pollen insights, for better health and well-being."
         },
         {
-          "appName": "Aller Track App",
-          "appLink": "",
+          "appName": "AllerTrack App",
+          "appLink": "https://play.google.com/store/apps/details?id=com.ambee.allertrack",
           "appDescription": "AllerTrack App helps users monitor allergens, track symptoms, and manage allergy triggers for improved health and comfort."
         },
         {
@@ -209,7 +209,7 @@ class HomeCubit extends Cubit<HomeState> {
       "apps": [
         {
           "appName": "MindPeers App",
-          "appLink": "https://play.google.com/store/search?q=mindpeers&c=apps",
+          "appLink": "https://play.google.com/store/apps/details?id=co.mindpeers",
           "appDescription": "Manage stress, relationships & anxiety with verified online therapy & counseling."
         },
       ],
@@ -241,7 +241,7 @@ class HomeCubit extends Cubit<HomeState> {
       "apps": [
         {
           "appName": "Kirana App",
-          "appLink": "", //"https://play.google.com/store/apps/details?id=com.flocco.app&hl=en_IN",
+          "appLink": "", //"https://play.google.com/store/apps/details?id=com.flocco.app",
           "appDescription": "Kirana App enables users to effortlessly shop for groceries from their trusted local Kirana stores."
         },
       ],
