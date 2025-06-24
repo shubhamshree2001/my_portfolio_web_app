@@ -30,7 +30,7 @@ class Strings {
   static const aistheticLocation = "Bangalore, India";
   static const aistheticDescription = "Key Focus: Flutter, Dart, Firebase, GCP";
   static const mindpeersCompanyname = "Mindpeers India Private Limited";
-  static const mindpeersDuration = "(Jun 2022 – Jul 2023)";
+  static const mindpeersDuration = "(Jun 2022 – Dec 2022)";
   static const mindpeersRole = "Software Engineer";
   static const mindpeersLocation = "Delhi, India";
   static const mindpeersDescription =

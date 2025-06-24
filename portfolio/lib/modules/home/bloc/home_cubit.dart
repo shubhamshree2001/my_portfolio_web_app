@@ -189,15 +189,22 @@ class HomeCubit extends Cubit<HomeState> {
         }
       ],
     },
-    // {
-    //   "companyLogo": AppImages.aistheticIcon,
-    //   "companyName": Strings.aistheticCompanyname,
-    //   "duration": Strings.aistheticDuration,
-    //   "role": Strings.aistheticRole,
-    //   "location": Strings.aistheticLocation,
-    //   "description": Strings.aistheticDescription,
-    //"organizationUrls": URLs.aistheticUrls,
-    // },
+    {
+      "companyLogo": AppImages.aestheticIcon,
+      "companyName": Strings.aistheticCompanyname,
+      "duration": Strings.aistheticDuration,
+      "role": Strings.aistheticRole,
+      "location": Strings.aistheticLocation,
+      "description": Strings.aistheticDescription,
+    "organizationUrls": URLs.aistheticUrls,
+      "apps": [
+      {
+        "appName": "Flocco App",
+        "appLink": "https://play.google.com/store/apps/details?id=com.flocco.app",
+        "appDescription": "Flocco App enables users to effortlessly shop for groceries from their trusted local Kirana stores."
+      },
+      ],
+    },
     {
       "companyLogo": AppImages.mindpeersIcon,
       "companyName": Strings.mindpeersCompanyname,
@@ -214,38 +221,38 @@ class HomeCubit extends Cubit<HomeState> {
         },
       ],
     },
-    {
-      "companyLogo": AppImages.studyTableIcon,
-      "companyName": Strings.studyTableCompanyname,
-      "duration": Strings.studyTableDuration,
-      "role": Strings.studyTableRole,
-      "location": Strings.studyTableLocation,
-      "description": Strings.studyTableDescription,
-      "organizationUrls": URLs.studyTableUrls,
-      "apps": [
-        {
-          "appName": "StudyTable",
-          "appLink": "",
-          "appDescription": "StudyTable App helps students organize their study schedules and resources efficiently for better academic management."
-        },
-      ],
-    },
-    {
-      "companyLogo": AppImages.sparksFoundationIcon,
-      "companyName": Strings.sparksFoundationCompanyname,
-      "duration": Strings.sparksFoundationDuration,
-      "role": Strings.sparksFoundationRole,
-      "location": Strings.sparksFoundationLocation,
-      "description": Strings.sparksFoundationDescription,
-      "organizationUrls": URLs.sparksFoundationUrls,
-      "apps": [
-        {
-          "appName": "Kirana App",
-          "appLink": "", //"https://play.google.com/store/apps/details?id=com.flocco.app",
-          "appDescription": "Kirana App enables users to effortlessly shop for groceries from their trusted local Kirana stores."
-        },
-      ],
-    },
+    // {
+    //   "companyLogo": AppImages.studyTableIcon,
+    //   "companyName": Strings.studyTableCompanyname,
+    //   "duration": Strings.studyTableDuration,
+    //   "role": Strings.studyTableRole,
+    //   "location": Strings.studyTableLocation,
+    //   "description": Strings.studyTableDescription,
+    //   "organizationUrls": URLs.studyTableUrls,
+    //   "apps": [
+    //     {
+    //       "appName": "StudyTable",
+    //       "appLink": "",
+    //       "appDescription": "StudyTable App helps students organize their study schedules and resources efficiently for better academic management."
+    //     },
+    //   ],
+    // },
+    // {
+    //   "companyLogo": AppImages.sparksFoundationIcon,
+    //   "companyName": Strings.sparksFoundationCompanyname,
+    //   "duration": Strings.sparksFoundationDuration,
+    //   "role": Strings.sparksFoundationRole,
+    //   "location": Strings.sparksFoundationLocation,
+    //   "description": Strings.sparksFoundationDescription,
+    //   "organizationUrls": URLs.sparksFoundationUrls,
+    //   "apps": [
+    //     {
+    //       "appName": "Kirana App",
+    //       "appLink": "", //"https://play.google.com/store/apps/details?id=com.flocco.app",
+    //       "appDescription": "Flocco App enables users to effortlessly shop for groceries from their trusted local Kirana stores."
+    //     },
+    //   ],
+    // },
   ];
 
   final List<Map<String, String>> educationItems = [
